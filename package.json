@@ -1,6 +1,6 @@
 {
   "name": "extract-required",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Extract CommonJS required module names in JS code",
   "main": "index.js",
   "scripts": {

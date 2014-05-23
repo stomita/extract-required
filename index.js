@@ -14,7 +14,13 @@ var extractRequiredModules = module.exports = function(code, options) {
             node.arguments[0].type === 'Literal' &&
             node.arguments[0].value;
     // if the module name is relative path, change to relative path from cwd.
-    return cwd && p.charAt(0) === "." ? "./" + path.relative(cwd, path.resolve(srcDir, p)) : p;
+    if (cwd && p.charAt(0) === ".") {
+      p = path.relative(cwd, path.resolve(srcDir, p));
+      if (p.charAt(0) !== ".") {
+        p = "./" + p;
+      }
+    }
+    return p;
   }).filter(function(name) { return name; });
 }
 
