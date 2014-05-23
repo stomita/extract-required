@@ -4,12 +4,20 @@
   "description": "Extract CommonJS required module names in JS code",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/*.test.js --require intelli-espower-loader"
+  },
+  "directories": {
+    "test": "test/"
   },
   "author": "Shinichi Tomita <shinichi.tomita@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "esprima": "^1.2.2",
     "esquery": "^0.3.0"
+  },
+  "devDependencies": {
+    "intelli-espower-loader": "^0.1.0",
+    "power-assert": "^0.7.2",
+    "mocha": "^1.19.0"
   }
 }
