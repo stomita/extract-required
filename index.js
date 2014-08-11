@@ -1,10 +1,11 @@
+/* global process */
 var esprima = require('esprima');
 var esquery = require('esquery');
 var fs = require('fs');
 var path = require('path');
 
 var extractRequiredModules = module.exports = function(code, options) {
-  options = options || {}
+  options = options || {};
   var cwd = options.cwd;
   var srcDir = options.src ? path.dirname(options.src) : cwd;
   var ast = esprima.parse(code);
@@ -22,7 +23,7 @@ var extractRequiredModules = module.exports = function(code, options) {
     }
     return p;
   }).filter(function(name) { return name; });
-}
+};
 
 if (require.main === module) {
   var filename = process.argv[process.argv.length - 1];
