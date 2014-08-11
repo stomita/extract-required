@@ -3,6 +3,8 @@ var esprima = require('esprima');
 var esquery = require('esquery');
 var fs = require('fs');
 var path = require('path');
+var minimatch = require('minimatch');
+var typeName = require('type-name');
 
 var extractRequiredModules = module.exports = function(code, options) {
   options = options || {};
@@ -22,7 +24,19 @@ var extractRequiredModules = module.exports = function(code, options) {
       }
     }
     return p;
-  }).filter(function(name) { return name; });
+  }).filter(function(name) {
+    if (name && options.ignore) {
+      var ignores = typeName(options.ignore) === 'Array' ? options.ignore : [ options.ignore ];
+      for (var i=0, len=ignores.length; i<len; i++) {
+        var ignore = ignores[i];
+        if (/[\*\?\!\{\}]/.test(ignore) ? minimatch(name, ignore) : name === ignore) {
+          return false;
+        }
+      }
+      return true;
+    }
+    return name;
+  });
 };
 
 if (require.main === module) {
