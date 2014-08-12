@@ -1,5 +1,6 @@
 extract-required
 ================
 
-Extract CommonJS required module names in JS code.
+Scan all CommonJS `require()` calls in a JS code and extract module names as a list.
+Relative calls are resolved and changed to a path from base directory.
 
